@@ -4,7 +4,7 @@ import Surah from '../components/Surah'
 import Footer from '../components/Footer'
 import Layout from '../ui/Layout'
 import { Link } from 'react-router-dom'
-import { AiOutlineClockCircle, AiOutlineArrowRight } from 'react-icons/ai'
+import { AiOutlineClockCircle, AiOutlineArrowRight, AiOutlinePlusCircle, AiOutlineSetting } from 'react-icons/ai'
 
 function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -29,10 +29,11 @@ function HomePage() {
             Temukan ketenangan dengan membaca Al-Qur'an melalui aplikasi digital kami yang bersih dan mudah digunakan.
           </p>
 
-          {/* Last Read Section */}
-          {lastRead && (
-            <div className="mt-10 max-w-md mx-auto">
-              <Link to={`/surah/${lastRead.surahId}`} className="group block">
+          {/* Features Grid */}
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            {/* Last Read (Integrated into grid if exists) */}
+            {lastRead && (
+              <Link to={`/surah/${lastRead.surahId}`} className="group block md:col-span-3">
                 <div className="relative overflow-hidden glass border border-emerald-500/30 p-5 rounded-2xl flex items-center justify-between hover:border-emerald-500 transition-all shadow-lg shadow-emerald-500/10">
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-emerald-500 text-white rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
@@ -45,13 +46,50 @@ function HomePage() {
                     </div>
                   </div>
                   <AiOutlineArrowRight className="text-emerald-500 transform group-hover:translate-x-1 transition-all" size={20} />
-
-                  {/* Decorative background gradient */}
                   <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-emerald-500/10 to-transparent pointer-events-none"></div>
                 </div>
               </Link>
-            </div>
-          )}
+            )}
+
+            {/* Tasbih Card */}
+            <Link to="/tasbih" className="group block">
+              <div className="h-full glass border border-slate-700 p-6 rounded-2xl flex items-center gap-4 hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all">
+                <div className="w-12 h-12 bg-slate-800 text-emerald-500 rounded-xl flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-all shadow-lg">
+                  <AiOutlinePlusCircle size={24} />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-slate-100 font-bold">Tasbih</h3>
+                  <p className="text-slate-400 text-[10px] mt-1">Dzikir digital</p>
+                </div>
+              </div>
+            </Link>
+
+            {/* Jadwal Sholat Card */}
+            <Link to="/jadwal-sholat" className="group block">
+              <div className="h-full glass border border-slate-700 p-6 rounded-2xl flex items-center gap-4 hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all">
+                <div className="w-12 h-12 bg-slate-800 text-emerald-500 rounded-xl flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-all shadow-lg">
+                  <AiOutlineClockCircle size={24} />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-slate-100 font-bold">Jadwal</h3>
+                  <p className="text-slate-400 text-[10px] mt-1">Waktu adzan</p>
+                </div>
+              </div>
+            </Link>
+
+            {/* Settings Card */}
+            <Link to="/settings" className="group block">
+              <div className="h-full glass border border-slate-700 p-6 rounded-2xl flex items-center gap-4 hover:border-emerald-500/50 hover:bg-emerald-500/5 transition-all">
+                <div className="w-12 h-12 bg-slate-800 text-emerald-500 rounded-xl flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-all shadow-lg">
+                  <AiOutlineSetting size={24} />
+                </div>
+                <div className="text-left">
+                  <h3 className="text-slate-100 font-bold">Setelan</h3>
+                  <p className="text-slate-400 text-[10px] mt-1">Ukuran font</p>
+                </div>
+              </div>
+            </Link>
+          </div>
         </div>
 
         <Layout>

@@ -13,7 +13,20 @@ function SurahDetail() {
   const [currentVerse, setCurrentVerse] = useState(null);
   const [lastRead, setLastRead] = useState(null);
 
+  const [fontSize, setFontSize] = useState(36);
+  const [showTranslation, setShowTranslation] = useState(true);
+  const [showLatin, setShowLatin] = useState(true);
+
   useEffect(() => {
+    const savedSize = localStorage.getItem('quran_font_size');
+    if (savedSize) setFontSize(parseInt(savedSize));
+
+    const savedTranslation = localStorage.getItem('quran_show_translation');
+    if (savedTranslation !== null) setShowTranslation(savedTranslation === 'true');
+
+    const savedLatin = localStorage.getItem('quran_show_latin');
+    if (savedLatin !== null) setShowLatin(savedLatin === 'true');
+
     setIsLoading(true);
     axios.get(`/surah/${surahId}`)
       .then((response) => {
@@ -147,14 +160,21 @@ function SurahDetail() {
             </div>
 
             <div className="text-right mb-8">
-              <h5 className='font-arab text-4xl md:text-5xl leading-[1.8] text-slate-100 tracking-wide'>
+              <h5
+                className='font-arab leading-[1.8] text-slate-100 tracking-wide'
+                style={{ fontSize: `${fontSize}px` }}
+              >
                 {item.text?.arab}
               </h5>
             </div>
 
             <div className="space-y-4">
-              <p className='text-emerald-400/80 italic font-medium leading-relaxed leading-6'>{item.text?.transliteration?.en}</p>
-              <p className='text-slate-300 leading-relaxed text-lg'>{item.translation?.id}</p>
+              {showLatin && (
+                <p className='text-emerald-400/80 italic font-medium leading-relaxed'>{item.text?.transliteration?.en}</p>
+              )}
+              {showTranslation && (
+                <p className='text-slate-300 leading-relaxed text-lg'>{item.translation?.id}</p>
+              )}
             </div>
           </li>
         ))}
