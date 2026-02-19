@@ -40,3 +40,9 @@ body {
   border-color: var(--primary);
   box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.2);
 }
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 70px;
+  }
+}

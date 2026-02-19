@@ -7,6 +7,7 @@ import ErrorPage from "./pages/ErrorPage"
 import TasbihPage from "./pages/TasbihPage"
 import JadwalSholatPage from "./pages/JadwalSholatPage"
 import SettingsPage from "./pages/SettingsPage"
+import BottomNav from "./components/BottomNav"
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<ErrorPage />} />
         </Routes>
+        <BottomNav />
       </BrowserRouter>
     </>
   )
